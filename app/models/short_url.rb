@@ -7,7 +7,25 @@ class ShortUrl < ApplicationRecord
   validates :full_url, presence: true
   validate :validate_full_url
 
+  #Gets the id from db as a parameter and calls the function encode_id(id).
+  #Returns the short code in base62.
   def short_code
+    return nil if id == nil
+    encode_id(id)
+  end
+
+  #This algorithm encodes the id in base10 and returns a string in base62.
+  def encode_id(id)
+    code = ""
+    length = CHARACTERS.length
+
+    #id needs to be > 0
+    while id.positive?
+      code = CHARACTERS[id % length] + code
+      id = id / length
+    end
+    code
+
   end
 
   def update_title!
