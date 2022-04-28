@@ -6,11 +6,14 @@ class ShortUrlsController < ApplicationController
 
   #Return the top 100 most frequently accessed shortcodes.
   def index
-    @short_urls = ShortUrl.order(click_count: :desc).limit(100)
-    render json: { :urls => @short_urls}, status: :ok
+    @urls = ShortUrl.order(click_count: :desc).limit(100)
+    render json: {:urls => @urls}, status: :ok
   end
 
   def create
+    full_url = params[:full_url]
+    @short_url = ShortUrl.create(full_url: full_url)
+    render json: @short_url, status: :created
   end
 
   def show
