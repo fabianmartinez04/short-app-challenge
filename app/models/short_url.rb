@@ -29,6 +29,11 @@ class ShortUrl < ApplicationRecord
   end
 
   def update_title!
+    begin
+      update(title: short_code)
+    rescue StandardError
+      errors.add(:full_url, :invalid_url, "Unable to access URL")
+    end
   end
 
   private
