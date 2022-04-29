@@ -10,13 +10,19 @@ class ShortUrlsController < ApplicationController
     render json: {:urls => @urls}, status: :ok
   end
 
-  # Register the full url within the database.
+  # Register the full url within the database and Update the title column with the short code using a background Job.
   #
   # Returns a json containing the information about the ful_url that got created.
   def create
     full_url = params[:full_url]
-    @short_url = ShortUrl.create(full_url: full_url)
-    render json: @short_url, status: :created
+    @short_url = ShortUrl.new(full_url: full_url)
+    if @short_url.save
+      # Use the id to find the record and call the background job.
+      UpdateTitleJob.perform_later(@short_url.id)
+      render json: @short_url, status: :created
+    else
+      render json: {:errors => @short_url.errors.values.flatten}, status: :bad_request
+    end
   end
 
   def show
