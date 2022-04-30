@@ -1,3 +1,7 @@
+require 'uri'
+require 'nokogiri'
+require 'open-uri'
+
 class ShortUrl < ApplicationRecord
 
   CHARACTERS = [*'0'..'9', *'a'..'z', *'A'..'Z'].freeze
@@ -32,7 +36,11 @@ class ShortUrl < ApplicationRecord
   #Return an error if the url is not allowed.
   def update_title!
     begin
-      update(title: short_code)
+      tempfile = URI.open(full_url)
+      #Gets the title directly from the web page.
+      document = Nokogiri::HTML.parse(tempfile)
+      title = document.title || ''
+      update(title: title)
     rescue StandardError
       errors.add(:full_url, :invalid_url, "Unable to access url entered.")
     end

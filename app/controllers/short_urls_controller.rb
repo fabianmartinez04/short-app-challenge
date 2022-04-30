@@ -10,7 +10,7 @@ class ShortUrlsController < ApplicationController
     render json: {:urls => @urls}, status: :ok
   end
 
-  # Register the full url within the database and Update the title column with the short code using a background Job.
+  # Register the full url within the database and Update the title column with the title of the webpage using a background Job.
   #
   # Returns a json containing the information about the ful_url that got created.
   def create
