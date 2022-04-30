@@ -46,6 +46,21 @@ class ShortUrl < ApplicationRecord
     end
   end
 
+  def self.decode_short_code(code)
+    return nil if code == nil
+    number = 0
+    length = CHARACTERS.length
+    code.to_s.each_char do |char|
+      number = (number*length) + CHARACTERS.index(char)
+    end
+    number
+  end
+
+  def self.find_by_short_code(short_code)
+    id = decode_short_code(short_code)
+    find_by!(id: id)
+  end
+
   private
 
   def validate_full_url
