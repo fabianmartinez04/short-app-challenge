@@ -1146,3 +1146,209 @@ Processing by ShortUrlsController#index as */*
 Completed 200 OK in 11ms (Views: 9.3ms | ActiveRecord: 0.6ms | Allocations: 3392)
 
 
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:18:09 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 58ms (Views: 13.1ms | ActiveRecord: 6.8ms | Allocations: 9382)
+
+
+Started POST "/short_urls.json" for 172.26.0.1 at 2022-05-02 04:18:47 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#create as JSON
+  Parameters: {"full_url"=>"https://nytimes.com"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:19:in `create'
+  [1m[36mShortUrl Create (0.8ms)[0m  [1m[32mINSERT INTO `short_urls` (`full_url`, `created_at`, `updated_at`) VALUES ('https://nytimes.com', '2022-05-02 04:18:47.559240', '2022-05-02 04:18:47.559240')[0m
+  ↳ app/controllers/short_urls_controller.rb:19:in `create'
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:19:in `create'
+[ActiveJob] Enqueued UpdateTitleJob (Job ID: 75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6) to Resque(default) with arguments: 19
+Completed 201 Created in 207ms (Views: 0.5ms | ActiveRecord: 4.2ms | Allocations: 9915)
+
+
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6] Performing UpdateTitleJob (Job ID: 75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6) from Resque(default) enqueued at 2022-05-02T04:18:47Z with arguments: 19
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   ↳ app/jobs/update_title_job.rb:8:in `perform'
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 19 LIMIT 1[0m
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   ↳ app/jobs/update_title_job.rb:8:in `perform'
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:18:53 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 21ms (Views: 16.6ms | ActiveRecord: 0.7ms | Allocations: 3449)
+
+
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   ↳ app/models/short_url.rb:43:in `update_title!'
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   [1m[36mShortUrl Update (0.4ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`title` = 'The New York Times - Breaking News, US News, World News and Videos', `short_urls`.`updated_at` = '2022-05-02 04:18:55.252862' WHERE `short_urls`.`id` = 19[0m
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   ↳ app/models/short_url.rb:43:in `update_title!'
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6]   ↳ app/models/short_url.rb:43:in `update_title!'
+[ActiveJob] [UpdateTitleJob] [75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6] Performed UpdateTitleJob (Job ID: 75c86dc3-75d4-4ced-9fc9-380fcb2d4cd6) from Resque(default) in 2034.51ms
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:19:03 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 30ms (Views: 9.9ms | ActiveRecord: 0.6ms | Allocations: 3460)
+
+
+Started HEAD "/7" for 172.26.0.1 at 2022-05-02 04:19:47 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#show as */*
+  Parameters: {"id"=>"7"}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 7 LIMIT 1[0m
+  ↳ app/models/short_url.rb:61:in `find_by_short_code'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[36mShortUrl Update (0.6ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`click_count` = 1, `short_urls`.`updated_at` = '2022-05-02 04:19:47.333706' WHERE `short_urls`.`id` = 7[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+Redirected to https://unilever.com
+Completed 302 Found in 88ms (ActiveRecord: 4.8ms | Allocations: 6069)
+
+
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:19:53 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 19ms (Views: 16.5ms | ActiveRecord: 0.8ms | Allocations: 3443)
+
+
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:24:40 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (1.0ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 119ms (Views: 16.3ms | ActiveRecord: 5.5ms | Allocations: 10023)
+
+
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:31:02 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.8ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 97ms (Views: 18.8ms | ActiveRecord: 4.0ms | Allocations: 9712)
+
+
+Started GET "/" for 172.26.0.1 at 2022-05-02 04:55:13 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.9ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 77ms (Views: 25.5ms | ActiveRecord: 4.6ms | Allocations: 9823)
+
+
+Started GET "/" for 172.26.0.1 at 2022-05-02 06:01:44 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (1.8ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 63ms (Views: 15.4ms | ActiveRecord: 6.6ms | Allocations: 9823)
+
+
+Started POST "/short_urls.json" for 172.26.0.1 at 2022-05-02 06:03:08 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#create as JSON
+  Parameters: {"full_url"=>"https://www.baccredomatic.com/"}
+  [1m[35m (5.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:19:in `create'
+  [1m[36mShortUrl Create (2.6ms)[0m  [1m[32mINSERT INTO `short_urls` (`full_url`, `created_at`, `updated_at`) VALUES ('https://www.baccredomatic.com/', '2022-05-02 06:03:08.585118', '2022-05-02 06:03:08.585118')[0m
+  ↳ app/controllers/short_urls_controller.rb:19:in `create'
+  [1m[35m (5.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:19:in `create'
+[ActiveJob] Enqueued UpdateTitleJob (Job ID: ae95ec25-6510-4bdf-aa3a-3a4d49506caa) to Resque(default) with arguments: 20
+Completed 201 Created in 250ms (Views: 1.6ms | ActiveRecord: 12.7ms | Allocations: 9934)
+
+
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa] Performing UpdateTitleJob (Job ID: ae95ec25-6510-4bdf-aa3a-3a4d49506caa) from Resque(default) enqueued at 2022-05-02T06:03:08Z with arguments: 20
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   [1m[35m (1.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   ↳ app/jobs/update_title_job.rb:8:in `perform'
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   [1m[36mShortUrl Load (1.6ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 20 LIMIT 1[0m
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   ↳ app/jobs/update_title_job.rb:8:in `perform'
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   ↳ app/models/short_url.rb:43:in `update_title!'
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   [1m[36mShortUrl Update (0.5ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`title` = 'Banca Personas | BAC Credomatic', `short_urls`.`updated_at` = '2022-05-02 06:03:11.735370' WHERE `short_urls`.`id` = 20[0m
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   ↳ app/models/short_url.rb:43:in `update_title!'
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa]   ↳ app/models/short_url.rb:43:in `update_title!'
+[ActiveJob] [UpdateTitleJob] [ae95ec25-6510-4bdf-aa3a-3a4d49506caa] Performed UpdateTitleJob (Job ID: ae95ec25-6510-4bdf-aa3a-3a4d49506caa) from Resque(default) in 1153.54ms
+Started GET "/" for 172.26.0.1 at 2022-05-02 06:03:25 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (0.9ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 36ms (Views: 33.4ms | ActiveRecord: 0.9ms | Allocations: 3905)
+
+
+Started HEAD "/k" for 172.26.0.1 at 2022-05-02 06:03:43 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#show as */*
+  Parameters: {"id"=>"k"}
+  [1m[36mShortUrl Load (0.5ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 20 LIMIT 1[0m
+  ↳ app/models/short_url.rb:61:in `find_by_short_code'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[36mShortUrl Update (2.1ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`click_count` = 1, `short_urls`.`updated_at` = '2022-05-02 06:03:44.013480' WHERE `short_urls`.`id` = 20[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[35m (4.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+Redirected to https://www.baccredomatic.com/
+Completed 302 Found in 75ms (ActiveRecord: 7.1ms | Allocations: 6070)
+
+
+Started HEAD "/k" for 172.26.0.1 at 2022-05-02 06:03:50 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#show as */*
+  Parameters: {"id"=>"k"}
+  [1m[36mShortUrl Load (0.6ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 20 LIMIT 1[0m
+  ↳ app/models/short_url.rb:61:in `find_by_short_code'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[36mShortUrl Update (0.9ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`click_count` = 2, `short_urls`.`updated_at` = '2022-05-02 06:03:50.313912' WHERE `short_urls`.`id` = 20[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[35m (10.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+Redirected to https://www.baccredomatic.com/
+Completed 302 Found in 28ms (ActiveRecord: 12.1ms | Allocations: 3319)
+
+
+Started HEAD "/k" for 172.26.0.1 at 2022-05-02 06:03:53 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#show as */*
+  Parameters: {"id"=>"k"}
+  [1m[36mShortUrl Load (0.7ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 20 LIMIT 1[0m
+  ↳ app/models/short_url.rb:61:in `find_by_short_code'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[36mShortUrl Update (0.6ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`click_count` = 3, `short_urls`.`updated_at` = '2022-05-02 06:03:53.385887' WHERE `short_urls`.`id` = 20[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:31:in `show'
+Redirected to https://www.baccredomatic.com/
+Completed 302 Found in 24ms (ActiveRecord: 5.0ms | Allocations: 3305)
+
+
+Started GET "/" for 172.26.0.1 at 2022-05-02 06:04:06 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ShortUrlsController#index as */*
+  [1m[36mShortUrl Load (1.1ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` ORDER BY `short_urls`.`click_count` DESC LIMIT 100[0m
+  ↳ app/controllers/short_urls_controller.rb:10:in `index'
+Completed 200 OK in 32ms (Views: 30.1ms | ActiveRecord: 1.1ms | Allocations: 3893)
+
+

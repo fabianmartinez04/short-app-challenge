@@ -61,12 +61,20 @@ class ShortUrl < ApplicationRecord
     find_by!(id: id)
   end
 
+  def as_json(options={})
+    super(methods: :short_code)
+  end
+
+  def public_attributes
+    as_json
+  end
+
   private
 
   def validate_full_url
     # The =~ operator matches the regular expression against a string.
     if not full_url =~ URL_REGEX
-      errors.add(:full_url, 'The digited URL is not valid, please enter a correct structure of URL.')
+      errors.add(:full_url, "is not a valid url")
     end
   end
 
