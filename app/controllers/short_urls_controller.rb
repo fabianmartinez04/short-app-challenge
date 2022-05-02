@@ -25,6 +25,9 @@ class ShortUrlsController < ApplicationController
     end
   end
 
+  # Redirects to full url from the short url.
+  #
+  # Increments the ShortUrl's click_count attribute by 1
   def show
     begin
       @short_url = ShortUrl.find_by_short_code(params[:id])

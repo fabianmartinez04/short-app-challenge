@@ -1,3 +1,4 @@
+# Imported libraries.
 require 'uri'
 require 'nokogiri'
 require 'open-uri'
@@ -31,9 +32,9 @@ class ShortUrl < ApplicationRecord
     code
   end
 
-  #Updates the title attribute of the ShortUrl.
+  # Updates the title attribute of the ShortUrl.
   #
-  #Return an error if the url is not allowed.
+  # Return an error if the url is not allowed.
   def update_title!
     begin
       tempfile = URI.open(full_url)
@@ -46,6 +47,9 @@ class ShortUrl < ApplicationRecord
     end
   end
 
+  # Decodes the short code in base62 to an Integer in base10.
+  #
+  # Returns an Integer that is the "id" of the url.
   def self.decode_short_code(code)
     return nil if code == nil
     number = 0
@@ -56,21 +60,27 @@ class ShortUrl < ApplicationRecord
     number
   end
 
+  # Call the decode_short_code method to convert the short code into an integer (id) and returns a ShortUrl object.
   def self.find_by_short_code(short_code)
     id = decode_short_code(short_code)
     find_by!(id: id)
   end
 
+  # This method is almost always used to return a hash representing of the model.
+  #
+  # In this case, the configuration is passed through options (when need to pass optional arguments to method).
   def as_json(options={})
     super(methods: :short_code)
   end
 
+  # This method is used to display all the attributes of the object and to fulfill the tests.
   def public_attributes
     as_json
   end
 
   private
 
+  # Validates that the full url entered is correct.
   def validate_full_url
     # The =~ operator matches the regular expression against a string.
     if not full_url =~ URL_REGEX
